@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: testecvc
+
+booking:
+  fee: 0.70
+
+user:
+  login: usuario
+  passwd: senha
+
+jwt:
+  secret: gxpDDSFYh2988jGRPvugceuysCNLdiubH0Fsu2YDBR0=
+  expiration: 86400000
+
+broker-service:
+  url: http://localhost:9090/broker-service
