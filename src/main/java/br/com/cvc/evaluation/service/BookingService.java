@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import br.com.cvc.evaluation.broker.BrokerService;
 import br.com.cvc.evaluation.broker.dto.BrokerHotel;
@@ -80,7 +79,7 @@ public class BookingService {
 		final var hotel = this.hotelMapper.toDomain(brokerHotel);
 		hotel.setRooms(brokerHotel.rooms().stream()
 				.map(brokerHotelRoom -> this.calculateTotalPrice(brokerHotelRoom, days, adults, child))
-				.collect(Collectors.toList()));
+				.toList());
 
 		log.info("Booking result {}", hotel);
 		return hotel;
@@ -101,6 +100,6 @@ public class BookingService {
 
 		log.info("Result of searching hotels: {}", hotels.size());
 		return hotels.stream().map(brokerHotel -> this.calculateBooking(brokerHotel, period, adults, child))
-				.collect(Collectors.toList());
+				.toList();
 	}
 }
