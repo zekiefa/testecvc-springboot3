@@ -60,8 +60,8 @@ public class AuthenticationEndpointTest {
         // Asserts
         assertAll("success",
                         () -> assertNotNull(response),
-                        () -> assertThat(response.getToken(), notNullValue()),
-                        () -> assertThat(response.getType(), is("Bearer"))
+                        () -> assertThat(response.token(), notNullValue()),
+                        () -> assertThat(response.type(), is("Bearer"))
         );
     }
 

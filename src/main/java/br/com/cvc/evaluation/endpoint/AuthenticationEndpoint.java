@@ -26,7 +26,7 @@ public class AuthenticationEndpoint {
     public ResponseEntity<Token> login(@Validated @RequestBody final Login loginAuth) {
         try {
             final var found = this.authenticationService
-                            .loadUserByUsername(loginAuth.getUser());
+                            .loadUserByUsername(loginAuth.user());
             final var token = tokenService.generateToken(found.getUsername());
             return ResponseEntity
                             .ok(Token.builder()
