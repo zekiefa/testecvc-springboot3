@@ -33,7 +33,7 @@ class BrokerServiceTest {
                         () -> assertThat(hotelsByCity, not(emptyCollectionOf(BrokerHotel.class))),
                         () -> assertThat(hotelsByCity.size(), is(2)),
                         () -> assertTrue(hotelsByCity.stream()
-                                        .allMatch(brokerHotel -> brokerHotel.getCityCode().equals(cityCode)))
+                                        .allMatch(brokerHotel -> brokerHotel.cityCode().equals(cityCode)))
         );
     }
 
@@ -53,7 +53,7 @@ class BrokerServiceTest {
 
         assertAll("success",
                         () -> assertTrue(hotelDetails.isPresent()),
-                        () -> assertThat(hotelDetails.get().getId(), is(hotelCode))
+                        () -> assertThat(hotelDetails.get().id(), is(hotelCode))
         );
     }
 

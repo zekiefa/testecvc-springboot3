@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PriceDetail {
-	private BigDecimal pricePerDayAdult;
-	private BigDecimal pricePerDayChild;
+    private BigDecimal pricePerDayAdult;
+    private BigDecimal pricePerDayChild;
 }

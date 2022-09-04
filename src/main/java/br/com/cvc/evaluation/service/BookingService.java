@@ -51,19 +51,19 @@ public class BookingService {
 	private Room calculateTotalPrice(final BrokerHotelRoom brokerHotelRoom, final Long days, final Integer adults,
 			final Integer child) {
 		log.info("Calculating total price: room {}, {} days, {} adults, {} child",
-						brokerHotelRoom.getCategoryName(), days, adults, child);
+						brokerHotelRoom.categoryName(), days, adults, child);
 		final var room = this.roomMapper.toDomain(brokerHotelRoom);
 		var totalPrice = BigDecimal.ZERO;
 
 		if (adults > 0) {
 			room.getPriceDetail()
-					.setPricePerDayAdult(this.calculateTotalPrice(brokerHotelRoom.getPrice().getAdult(), ONE_DAY));
+							.setPricePerDayAdult(this.calculateTotalPrice(brokerHotelRoom.price().adult(), ONE_DAY));
 			totalPrice = totalPrice.add(room.getPriceDetail().getPricePerDayAdult().multiply(BigDecimal.valueOf(days)));
 		}
 
 		if (child > 0) {
 			room.getPriceDetail()
-					.setPricePerDayChild(this.calculateTotalPrice(brokerHotelRoom.getPrice().getChild(), ONE_DAY));
+					.setPricePerDayChild(this.calculateTotalPrice(brokerHotelRoom.price().child(), ONE_DAY));
 			totalPrice = totalPrice.add(room.getPriceDetail().getPricePerDayChild().multiply(BigDecimal.valueOf(days)));
 		}
 
@@ -76,9 +76,9 @@ public class BookingService {
 	private Hotel calculateBooking(final BrokerHotel brokerHotel, final Long days, final Integer adults,
 			final Integer child) {
 		log.info("Calculating booking: hotel {}, {} days, {} adults, {} child",
-						brokerHotel.getName(), days, adults, child);
+						brokerHotel.name(), days, adults, child);
 		final var hotel = this.hotelMapper.toDomain(brokerHotel);
-		hotel.setRooms(brokerHotel.getRooms().stream()
+		hotel.setRooms(brokerHotel.rooms().stream()
 				.map(brokerHotelRoom -> this.calculateTotalPrice(brokerHotelRoom, days, adults, child))
 				.collect(Collectors.toList()));
 

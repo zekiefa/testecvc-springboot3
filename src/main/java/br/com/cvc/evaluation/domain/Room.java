@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Room {
-	private Integer roomID;
-	private String categoryName;
-	private BigDecimal totalPrice;
-	private PriceDetail priceDetail;
+    private Integer roomID;
+    private String categoryName;
+    private BigDecimal totalPrice;
+    private PriceDetail priceDetail;
 }

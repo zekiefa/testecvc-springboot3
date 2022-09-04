@@ -32,8 +32,8 @@ class RoomMapperTest {
         final var room = this.mapper.toDomain(brokerHotelRoom);
 
         assertAll("domain",
-                        () -> assertThat(room.getRoomID(), is(brokerHotelRoom.getRoomID())),
-                        () -> assertThat(room.getCategoryName(), is(brokerHotelRoom.getCategoryName())),
+                        () -> assertThat(room.getRoomID(), is(brokerHotelRoom.roomID())),
+                        () -> assertThat(room.getCategoryName(), is(brokerHotelRoom.categoryName())),
                         () -> assertThat(room.getPriceDetail(), is(PriceDetail.builder()
                                         .pricePerDayAdult(BigDecimal.ZERO)
                                         .pricePerDayAdult(BigDecimal.ZERO).build())),

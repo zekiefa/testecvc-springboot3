@@ -69,11 +69,11 @@ class BookingServiceTest {
 
         // Asserts
         assertAll("hotel-details",
-                        () -> assertThat(hotel.getId(), is(brokerHotel.getId())),
-                        () -> assertThat(hotel.getCityName(), is(brokerHotel.getCityName())),
+                        () -> assertThat(hotel.getId(), is(brokerHotel.id())),
+                        () -> assertThat(hotel.getCityName(), is(brokerHotel.cityName())),
                         () -> assertFalse(hotel.getRooms().isEmpty()),
                         () -> verify(brokerService).getHotelDetails(anyInt()),
-                        () -> verify(feeService, times(brokerHotel.getRooms().size() * 2))
+                        () -> verify(feeService, times(brokerHotel.rooms().size() * 2))
                                         .calculateFee(any(), anyLong())
         );
     }
@@ -97,7 +97,7 @@ class BookingServiceTest {
                         () -> assertThat(hotels.size(), is(2)),
                         () -> verify(brokerService).findHotelsByCity(anyInt()),
                         () -> verify(feeService, times(brokerHotels.size() *
-                                        brokerHotels.stream().map(BrokerHotel::getRooms).mapToInt(List::size).sum()))
+                                        brokerHotels.stream().map(BrokerHotel::rooms).mapToInt(List::size).sum()))
                                         .calculateFee(any(), anyLong())
         );
     }

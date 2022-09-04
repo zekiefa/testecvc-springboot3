@@ -30,8 +30,8 @@ class HotelMapperTest {
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",
-                        () -> assertThat(hotel.getId(), is(brokerHotel.getId())),
-                        () -> assertThat(hotel.getCityName(), is(brokerHotel.getCityName())),
+                        () -> assertThat(hotel.getId(), is(brokerHotel.id())),
+                        () -> assertThat(hotel.getCityName(), is(brokerHotel.cityName())),
                         () -> assertFalse(hotel.getRooms().isEmpty())
         );
     }
@@ -44,8 +44,8 @@ class HotelMapperTest {
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",
-                        () -> assertThat(hotel.getId(), is(brokerHotel.getId())),
-                        () -> assertThat(hotel.getCityName(), is(brokerHotel.getCityName())),
+                        () -> assertThat(hotel.getId(), is(brokerHotel.id())),
+                        () -> assertThat(hotel.getCityName(), is(brokerHotel.cityName())),
                         () -> assertNull(hotel.getRooms())
         );
     }
@@ -58,8 +58,8 @@ class HotelMapperTest {
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",
-                        () -> assertThat(hotel.getId(), is(brokerHotel.getId())),
-                        () -> assertThat(hotel.getCityName(), is(brokerHotel.getCityName())),
+                        () -> assertThat(hotel.getId(), is(brokerHotel.id())),
+                        () -> assertThat(hotel.getCityName(), is(brokerHotel.cityName())),
                         () -> assertTrue(hotel.getRooms().isEmpty())
         );
     }
