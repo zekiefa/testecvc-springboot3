@@ -1,7 +1,7 @@
 # Simple Spring Boot Project
 
 ### Architecture
-- Java 17
+- Java 18
 - Spring Boot 3.0.0-M4
 - [Lombok](https://projectlombok.org) to avoid boilerplate code
 - [Mapstruct](https://mapstruct.org) for conversions between domains
@@ -47,6 +47,6 @@ curl --request GET \
 ````
 
 ### References
-- [Baeldung](https://www.baeldung.com)
-- [FreeCodeCamp](https://www.freecodecamp.org/portuguese/news/como-configurar-a-autenticacao-e-a-autorizacao-no-jwt-para-o-spring-boot-em-java/)
-
+- [Preparing for Spring Boot 3.0](https://spring.io/blog/2022/05/24/preparing-for-spring-boot-3-0)
+- [Spring Boot 3 and Spring Framework 6.0 – What’s New](https://www.baeldung.com/spring-boot-3-spring-6-new)
+- [New Features in Java 17](https://www.baeldung.com/java-17-new-features)
