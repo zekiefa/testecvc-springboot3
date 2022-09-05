@@ -1,5 +1,6 @@
 package br.com.cvc.evaluation.service;
 
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextBrokerHotel;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -20,12 +21,8 @@ import java.util.Optional;
 import br.com.cvc.evaluation.broker.BrokerService;
 import br.com.cvc.evaluation.broker.dto.BrokerHotel;
 import br.com.cvc.evaluation.domain.Hotel;
-import br.com.cvc.evaluation.fixtures.BrokerHotelFixture;
 import br.com.cvc.evaluation.service.mapper.HotelMapper;
 import br.com.cvc.evaluation.service.mapper.RoomMapper;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
@@ -51,15 +48,10 @@ class BookingServiceTest {
     @InjectMocks
     BookingService bookingService;
 
-    @BeforeAll
-    public static void setUp() {
-        FixtureFactoryLoader.loadTemplates("br.com.cvc.evaluation.fixtures");
-    }
-
     @Test
     void testGetHotelDetails() {
         // Arranges
-        final BrokerHotel brokerHotel = Fixture.from(BrokerHotel.class).gimme(BrokerHotelFixture.VALID);
+        final var brokerHotel = nextBrokerHotel();
         final var fee = BigDecimal.ONE;
         when(brokerService.getHotelDetails(anyInt())).thenReturn(Optional.of(brokerHotel));
         when(feeService.calculateFee(any(), anyLong())).thenReturn(fee);
@@ -81,7 +73,7 @@ class BookingServiceTest {
     @Test
     void testFindHotels() {
         // Arranges
-        final List<BrokerHotel> brokerHotels = Fixture.from(BrokerHotel.class).gimme(2, BrokerHotelFixture.VALID);
+        final var brokerHotels = List.of(nextBrokerHotel(), nextBrokerHotel());
         final var fee = BigDecimal.ONE;
         when(brokerService.findHotelsByCity(anyInt())).thenReturn(brokerHotels);
         when(feeService.calculateFee(any(), anyLong())).thenReturn(fee);

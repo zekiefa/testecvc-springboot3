@@ -1,6 +1,7 @@
 package br.com.cvc.evaluation.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
+@ConditionalOnProperty(prefix = "broker-service", name = "url")
 public class WebClientConfig {
     @Bean
     public WebClient brokerServiceClient(@Value("${broker-service.url}") final String baseUrl) {

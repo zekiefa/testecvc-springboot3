@@ -18,10 +18,9 @@
 		<java.version>18</java.version>
 		<lombok.version>1.18.24</lombok.version>
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
-		<fixture-factory.version>3.1.0</fixture-factory.version>
-		<hamcrest.version>2.2</hamcrest.version>
-		<wiremock.version>2.33.2</wiremock.version>
 		<easy-random-core.version>5.0.0</easy-random-core.version>
+		<hamcrest.version>2.2</hamcrest.version>
+		<mockserver.version>5.14.0</mockserver.version>
 		<logback-classic.version>1.2.11</logback-classic.version>
 		<jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
 		<javax.json-api.version>1.1.4</javax.json-api.version>
@@ -131,24 +130,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>br.com.six2six</groupId>
-			<artifactId>fixture-factory</artifactId>
-			<version>${fixture-factory.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest</artifactId>
 			<version>${hamcrest.version}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.tomakehurst</groupId>
-			<artifactId>wiremock-jre8</artifactId>
-			<scope>test</scope>
-			<version>${wiremock.version}</version>
 		</dependency>
 
 		<dependency>
@@ -173,6 +158,12 @@
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-netty-no-dependencies</artifactId>
+			<version>${mockserver.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -1,16 +1,16 @@
 package br.com.cvc.evaluation.service;
 
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextString;
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
+
 import br.com.cvc.evaluation.domain.User;
 import br.com.cvc.evaluation.fixtures.TokenBuilder;
-import br.com.cvc.evaluation.fixtures.UserFixture;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,14 +31,10 @@ class TokenServiceTest {
     private UserDetails user;
     private String token;
 
-    @BeforeAll
-    public static void setUp() {
-        FixtureFactoryLoader.loadTemplates("br.com.cvc.evaluation.fixtures");
-    }
 
     @BeforeEach
     void randomUserToken() {
-        this.user = Fixture.from(User.class).gimme(UserFixture.VALID);
+        this.user = new User(nextString(), nextUUID(), Collections.emptySet());
         this.token = tokenBuilder.createJWT(user.getUsername(), TTL_MILLIS);
     }
 

@@ -6,8 +6,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import br.com.cvc.evaluation.config.WebClientConfig;
-import br.com.cvc.evaluation.config.WireMockConfig;
+import br.com.cvc.evaluation.config.MockServerConfig;
+import br.com.cvc.evaluation.config.WebClientTestConfig;
 import br.com.cvc.evaluation.domain.Hotel;
 import br.com.cvc.evaluation.fixtures.TokenBuilder;
 import io.restassured.RestAssured;
@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(
                 webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-                classes={WireMockConfig.class,WebClientConfig.class})
+                classes={MockServerConfig.class, WebClientTestConfig.class})
 public class HotelEndpointTest {
     @LocalServerPort
     private int port;

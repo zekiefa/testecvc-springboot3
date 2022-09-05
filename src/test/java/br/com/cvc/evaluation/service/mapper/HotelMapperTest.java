@@ -1,5 +1,8 @@
 package br.com.cvc.evaluation.service.mapper;
 
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextBrokerHotel;
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextBrokerHotelWithEmptyRooms;
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextBrokerHotelWithoutRooms;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -7,26 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import br.com.cvc.evaluation.broker.dto.BrokerHotel;
-import br.com.cvc.evaluation.fixtures.BrokerHotelFixture;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
 class HotelMapperTest {
     final private HotelMapper mapper = Mappers.getMapper(HotelMapper.class);
-
-    @BeforeAll
-    public static void setUp() {
-        FixtureFactoryLoader.loadTemplates("br.com.cvc.evaluation.fixtures");
-    }
+    private
 
     @Test
     void testToDomain() {
-        final BrokerHotel brokerHotel = Fixture.from(BrokerHotel.class).gimme(BrokerHotelFixture.VALID);
-
+        final var brokerHotel = nextBrokerHotel();
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",
@@ -38,9 +31,7 @@ class HotelMapperTest {
 
     @Test
     void testToDomainWithoutRoom() {
-        final BrokerHotel brokerHotel = Fixture.from(BrokerHotel.class)
-                        .gimme(BrokerHotelFixture.VALID_WITHOUT_ROOM);
-
+        final var brokerHotel = nextBrokerHotelWithoutRooms();
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",
@@ -52,9 +43,7 @@ class HotelMapperTest {
 
     @Test
     void testToDomainWithEmptyRoomList() {
-        final BrokerHotel brokerHotel = Fixture.from(BrokerHotel.class)
-                        .gimme(BrokerHotelFixture.VALID_WITH_EMPTY_ROOM_LIST);
-
+        final var brokerHotel = nextBrokerHotelWithEmptyRooms();
         final var hotel = this.mapper.toDomain(brokerHotel);
 
         assertAll("domain",

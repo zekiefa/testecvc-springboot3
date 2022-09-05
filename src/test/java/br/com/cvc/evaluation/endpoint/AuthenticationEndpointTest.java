@@ -7,16 +7,14 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import br.com.cvc.evaluation.config.WebClientConfig;
-import br.com.cvc.evaluation.config.WireMockConfig;
+import java.util.UUID;
+
+import br.com.cvc.evaluation.config.MockServerConfig;
+import br.com.cvc.evaluation.config.WebClientTestConfig;
 import br.com.cvc.evaluation.domain.Login;
 import br.com.cvc.evaluation.domain.Token;
-import br.com.cvc.evaluation.fixtures.LoginFixture;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,15 +23,10 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(
                 webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-                classes = {WireMockConfig.class, WebClientConfig.class})
+                classes = {MockServerConfig.class, WebClientTestConfig.class})
 public class AuthenticationEndpointTest {
     @LocalServerPort
     private int port;
-
-    @BeforeAll
-    public static void setUp() {
-        FixtureFactoryLoader.loadTemplates("br.com.cvc.evaluation.fixtures");
-    }
 
     @BeforeEach
     void setUpPort() {
@@ -43,7 +36,7 @@ public class AuthenticationEndpointTest {
     @Test
     void testLogin() {
         // Arrange
-        final Login login = Fixture.from(Login.class).gimme(LoginFixture.VALID);
+        final var login = new Login("usuario", UUID.randomUUID().toString());
 
         // Act
         final var response = given()
@@ -68,7 +61,7 @@ public class AuthenticationEndpointTest {
     @Test
     void testLoginWithUserNotExists() {
         // Arrange
-        final Login login = Fixture.from(Login.class).gimme(LoginFixture.NOT_FOUND);
+        final var login = new Login("anotherUser", UUID.randomUUID().toString());
 
         // Act | Assert
         final var response = given()

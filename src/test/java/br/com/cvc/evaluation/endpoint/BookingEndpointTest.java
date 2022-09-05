@@ -5,8 +5,8 @@ import static io.restassured.RestAssured.given;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import br.com.cvc.evaluation.config.WebClientConfig;
-import br.com.cvc.evaluation.config.WireMockConfig;
+import br.com.cvc.evaluation.config.MockServerConfig;
+import br.com.cvc.evaluation.config.WebClientTestConfig;
 import br.com.cvc.evaluation.domain.Hotel;
 import br.com.cvc.evaluation.fixtures.TokenBuilder;
 import io.restassured.RestAssured;
@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 
 @SpringBootTest(
                 webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-                classes = {WireMockConfig.class, WebClientConfig.class})
+                classes = {MockServerConfig.class, WebClientTestConfig.class})
 public class BookingEndpointTest {
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 

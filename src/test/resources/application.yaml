@@ -12,6 +12,10 @@ user:
   login: usuario
   passwd: senha
 
+admin:
+  login: admin
+  passwd: admin
+
 jwt:
   secret: gxpDDSFYh2988jGRPvugceuysCNLdiubH0Fsu2YDBR0=
   expiration: 86400000

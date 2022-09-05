@@ -1,5 +1,6 @@
 package br.com.cvc.evaluation.service;
 
+import static br.com.cvc.evaluation.fixtures.FixtureUtil.nextUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyString;
@@ -7,11 +8,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import br.com.cvc.evaluation.domain.User;
-import br.com.cvc.evaluation.fixtures.UserFixture;
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,15 +22,10 @@ class AuthenticationServiceTest {
     @InjectMocks
     AuthenticationService authenticationService;
 
-    @BeforeAll
-    public static void setUp() {
-        FixtureFactoryLoader.loadTemplates("br.com.cvc.evaluation.fixtures");
-    }
-
     @Test
     void testLoadUserByUsername() {
         // Arranges
-        final User user = Fixture.from(User.class).gimme(UserFixture.VALID);
+        final var user = nextUser();
         when(userService.findByLogin(anyString())).thenReturn(Optional.of(user));
 
         // Act
