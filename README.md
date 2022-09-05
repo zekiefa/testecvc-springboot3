@@ -10,10 +10,9 @@
 - [io.jsonwebtoken](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api) for JWT authentication
 - [JUnit 5](https://junit.org/junit5/docs/current/user-guide) for unit tests
 - [Mockito](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
-- [Fixture Factory](https://github.com/six2six/fixture-factory) for generate fake objects
 - [Hamcrest](http://hamcrest.org/JavaHamcrest) for alternative asserts
 - [EasyRandom](https://github.com/j-easy/easy-random) for generate randomic objects
-- [Wiremock](https://wiremock.org/docs/) for asserts with endpoints and http clients
+- [MockServer](https://www.mock-server.com/) for asserts with endpoints and http clients
 
 ### Instructions
 - Clone the project
@@ -50,3 +49,4 @@ curl --request GET \
 - [Preparing for Spring Boot 3.0](https://spring.io/blog/2022/05/24/preparing-for-spring-boot-3-0)
 - [Spring Boot 3 and Spring Framework 6.0 – What’s New](https://www.baeldung.com/spring-boot-3-spring-6-new)
 - [New Features in Java 17](https://www.baeldung.com/java-17-new-features)
+- [MockServer: Creating Expectations](https://www.mock-server.com/mock_server/creating_expectations.html)
