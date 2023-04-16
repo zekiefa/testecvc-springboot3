@@ -29,10 +29,7 @@ public class AuthenticationEndpoint {
                             .loadUserByUsername(loginAuth.user());
             final var token = tokenService.generateToken(found.getUsername());
             return ResponseEntity
-                            .ok(Token.builder()
-                                            .type("Bearer")
-                                            .token(token)
-                                            .build());
+                            .ok(new Token("Bearer",token));
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
