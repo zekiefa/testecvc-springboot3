@@ -2,13 +2,14 @@ package br.com.cvc.evaluation.service;
 
 import java.math.BigDecimal;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 public class FeeService {
+	private static final Logger log = LoggerFactory.getLogger(FeeService.class);
 	// o ideal é que a comissão seja parametrizada via banco de dados
 	// ou disponibilizada por um serviço externo
 	private final BigDecimal fee;

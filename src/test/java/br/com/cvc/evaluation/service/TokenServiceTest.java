@@ -34,7 +34,7 @@ class TokenServiceTest {
 
     @BeforeEach
     void randomUserToken() {
-        this.user = new User(nextString(), nextUUID(), Collections.emptySet());
+        this.user = new User(nextString(), nextUUID(), Collections.emptyList());
         this.token = tokenBuilder.createJWT(user.getUsername(), TTL_MILLIS);
     }
 

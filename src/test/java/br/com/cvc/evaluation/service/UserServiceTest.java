@@ -3,6 +3,7 @@ package br.com.cvc.evaluation.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
 import java.util.UUID;
 
 import br.com.cvc.evaluation.domain.User;
@@ -16,7 +17,7 @@ class UserServiceTest {
     @Test
     void testFindByLogin() {
         final var result = userService.findByLogin(LOGIN)
-                        .orElse(User.builder().build());
+                        .orElse(new User("", "", Collections.emptyList()));
 
         assertEquals(LOGIN, result.getUsername());
     }

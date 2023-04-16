@@ -60,7 +60,7 @@ public final class FixtureUtil {
     }
 
     public static User nextUser() {
-        return new User(nextString(), nextUUID(), Collections.emptySet());
+        return new User(nextString(), nextUUID(), Collections.emptyList());
     }
 
 }

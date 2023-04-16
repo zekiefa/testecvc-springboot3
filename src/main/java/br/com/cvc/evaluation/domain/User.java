@@ -1,14 +1,12 @@
 package br.com.cvc.evaluation.domain;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
-import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Builder
-public record User(String username, String password, Set<Profile> profiles) implements UserDetails {
+public record User(String username, String password, List<Profile> profiles) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.profiles;

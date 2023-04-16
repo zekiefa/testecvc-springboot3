@@ -15,20 +15,17 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import br.com.cvc.evaluation.broker.BrokerService;
 import br.com.cvc.evaluation.broker.dto.BrokerHotel;
 import br.com.cvc.evaluation.domain.Hotel;
-import br.com.cvc.evaluation.service.mapper.HotelMapper;
-import br.com.cvc.evaluation.service.mapper.RoomMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,12 +35,6 @@ class BookingServiceTest {
 
     @Mock
     FeeService feeService;
-
-    @Spy
-    final HotelMapper hotelMapper = Mappers.getMapper(HotelMapper.class);
-
-    @Spy
-    final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
     @InjectMocks
     BookingService bookingService;
@@ -57,13 +48,13 @@ class BookingServiceTest {
         when(feeService.calculateFee(any(), anyLong())).thenReturn(fee);
 
         // Act
-        final var hotel = bookingService.getHotelDetails(1).orElse(Hotel.builder().build());
+        final var hotel = bookingService.getHotelDetails(1).orElse(this.emptyHotel());
 
         // Asserts
         assertAll("hotel-details",
-                        () -> assertThat(hotel.getId(), is(brokerHotel.id())),
-                        () -> assertThat(hotel.getCityName(), is(brokerHotel.cityName())),
-                        () -> assertFalse(hotel.getRooms().isEmpty()),
+                        () -> assertThat(hotel.id(), is(brokerHotel.id())),
+                        () -> assertThat(hotel.cityName(), is(brokerHotel.cityName())),
+                        () -> assertFalse(hotel.rooms().isEmpty()),
                         () -> verify(brokerService).getHotelDetails(anyInt()),
                         () -> verify(feeService, times(brokerHotel.rooms().size() * 2))
                                         .calculateFee(any(), anyLong())
@@ -93,4 +84,9 @@ class BookingServiceTest {
                                         .calculateFee(any(), anyLong())
         );
     }
+
+    private Hotel emptyHotel() {
+        return new Hotel(1, "", "", Collections.emptyList());
+    }
+
 }

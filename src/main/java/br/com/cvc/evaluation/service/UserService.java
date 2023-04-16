@@ -1,5 +1,6 @@
 package br.com.cvc.evaluation.service;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import br.com.cvc.evaluation.domain.User;
@@ -22,9 +23,9 @@ public class UserService {
     public Optional<User> findByLogin(final String login) {
         // o ideal é ter um banco de dados para consultar o usuário
         if (login.equals(this.login))
-            return Optional.of(User.builder()
-                        .username(login)
-                        .password(this.encoder.encode(this.passwd)).build());
+            return Optional.of(new User(login,
+                            this.encoder.encode(this.passwd),
+                            Collections.emptyList()));
 
         return Optional.empty();
     }

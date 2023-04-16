@@ -1,10 +1,10 @@
 # Simple Spring Boot Project
 
 ### Architecture
-- Java 18
-- Spring Boot 3.0.0-M4
-- [Lombok](https://projectlombok.org) to avoid boilerplate code
-- [Mapstruct](https://mapstruct.org) for conversions between domains
+- Java ~~18~~ 17
+- Spring Boot 3.0.5
+- ~~[Lombok](https://projectlombok.org) to avoid boilerplate code~~
+- ~~[Mapstruct](https://mapstruct.org) for conversions between domains~~
 - [WebClient](https://www.baeldung.com/spring-5-webclient): a reactive client HTTP
 - [SL4J](https://www.slf4j.org/manual.html) for logging
 - [io.jsonwebtoken](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api) for JWT authentication
