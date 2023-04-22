@@ -25,6 +25,8 @@ public class HotelEndpointTest {
     @LocalServerPort
     private int port;
 
+    private static final String BASE_URL = "/api/v1/hotels";
+
     @BeforeEach
     void setUp() {
         RestAssured.port = this.port;
@@ -42,7 +44,7 @@ public class HotelEndpointTest {
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
                         .log().all()
-                        .when().get(String.format("/hotels/%d", idHotel))
+                        .when().get(String.format(BASE_URL.concat("/%d"), idHotel))
                         .then()
                         .statusCode(HttpStatus.OK.value())
                         .extract()
@@ -62,7 +64,7 @@ public class HotelEndpointTest {
                         .contentType(ContentType.JSON)
                         .accept(ContentType.JSON)
                         .log().all()
-                        .when().get("/hotels/1")
+                        .when().get(BASE_URL.concat("/1"))
                         .then()
                         .statusCode(HttpStatus.FORBIDDEN.value());
     }

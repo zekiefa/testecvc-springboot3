@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 public class BookingEndpointTest {
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
+    private static final String BASE_URL = "/api/v1/booking";
     @LocalServerPort private int port;
 
     @BeforeEach
@@ -45,7 +46,7 @@ public class BookingEndpointTest {
                         .accept(ContentType.JSON)
                         .log().all()
                         .when()
-                        .get(String.format("/booking/%d/%s/%s/1/1", cityCode, checkin, checkout))
+                        .get(String.format(BASE_URL.concat("/%d/%s/%s/1/1"), cityCode, checkin, checkout))
                         .then()
                         .assertThat()
                         .statusCode(HttpStatus.OK.value())
@@ -61,7 +62,7 @@ public class BookingEndpointTest {
                         .accept(ContentType.JSON)
                         .log().all()
                         .when()
-                        .get("/booking/1/2/3/1/1")
+                        .get(BASE_URL.concat("/booking/1/2/3/1/1"))
                         .then()
                         .assertThat()
                         .statusCode(HttpStatus.FORBIDDEN.value());
