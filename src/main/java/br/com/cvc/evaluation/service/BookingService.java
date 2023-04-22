@@ -25,7 +25,8 @@ public class BookingService {
 	private final BrokerService brokerService;
 	private final FeeService feeService;
 
-	public BookingService(final BrokerService brokerService, final FeeService feeService) {
+	public BookingService(final BrokerService brokerService,
+					final FeeService feeService) {
 		this.brokerService = brokerService;
 		this.feeService = feeService;
 	}

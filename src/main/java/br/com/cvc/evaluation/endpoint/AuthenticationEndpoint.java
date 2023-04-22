@@ -4,7 +4,6 @@ import br.com.cvc.evaluation.domain.Login;
 import br.com.cvc.evaluation.domain.Token;
 import br.com.cvc.evaluation.service.AuthenticationService;
 import br.com.cvc.evaluation.service.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
@@ -16,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationEndpoint {
-    @Autowired
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
+
+    public AuthenticationEndpoint(final AuthenticationService authenticationService,
+                    final TokenService tokenService) {
+        this.authenticationService = authenticationService;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping
     public ResponseEntity<Token> login(@Validated @RequestBody final Login loginAuth) {
