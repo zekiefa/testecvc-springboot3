@@ -12,6 +12,8 @@ import br.com.cvc.evaluation.broker.dto.BrokerHotelRoom;
 import br.com.cvc.evaluation.domain.Hotel;
 import br.com.cvc.evaluation.domain.PriceDetail;
 import br.com.cvc.evaluation.domain.Room;
+import br.com.cvc.evaluation.exceptions.BookingPeriodInvalidException;
+import br.com.cvc.evaluation.exceptions.HotelNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,10 @@ public class BookingService {
 
 	private Long calculatePeriod(final LocalDate checkin, final LocalDate checkout) {
 		log.info("Calculating period: checking {}, checkout {}", checkin, checkout);
+
+		if (checkin.isAfter(checkout)) {
+			throw new BookingPeriodInvalidException("The checkin date is greater than the checkout date.");
+		}
 		return checkin.until(checkout, ChronoUnit.DAYS);
 	}
 
@@ -83,6 +89,10 @@ public class BookingService {
 	public Optional<Hotel> getHotelDetails(final Integer codeHotel) {
 		log.info("Finding hotel details: {}", codeHotel);
 		final var hotelDetails = this.brokerService.getHotelDetails(codeHotel);
+
+		if (hotelDetails.isEmpty()) {
+			throw new HotelNotFoundException("No hotel details");
+		}
 
 		return hotelDetails.map(brokerHotel -> this.calculateBooking(brokerHotel, ONE_DAY, ONE_PAX, ONE_PAX));
 	}

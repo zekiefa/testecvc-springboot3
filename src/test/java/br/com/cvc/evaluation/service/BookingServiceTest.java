@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyLong;
@@ -22,6 +23,8 @@ import java.util.Optional;
 import br.com.cvc.evaluation.broker.BrokerService;
 import br.com.cvc.evaluation.broker.dto.BrokerHotel;
 import br.com.cvc.evaluation.domain.Hotel;
+import br.com.cvc.evaluation.exceptions.BookingPeriodInvalidException;
+import br.com.cvc.evaluation.exceptions.HotelNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -84,6 +87,26 @@ class BookingServiceTest {
                                         .calculateFee(any(), anyLong())
         );
     }
+    @Test
+    void testFindHotelsWithInvalidPeriod() {
+        // Arranges
+        final var checkin = LocalDate.now();
+        final var checkout = checkin.minusDays(DayOfWeek.values().length);
+
+        // Act / Assert
+        assertThrows(BookingPeriodInvalidException.class,
+                        () -> bookingService.findHotels(27, checkin, checkout, 3, 2));
+    }
+    @Test
+    void testGetNoHotelDetails() {
+        // Arranges
+        when(brokerService.getHotelDetails(anyInt())).thenReturn(Optional.empty());
+
+        // Act | Assert
+        assertThrows(HotelNotFoundException.class,
+                        () -> bookingService.getHotelDetails(1));
+    }
+
 
     private Hotel emptyHotel() {
         return new Hotel(1, "", "", Collections.emptyList());
