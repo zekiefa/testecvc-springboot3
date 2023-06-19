@@ -12,7 +12,7 @@ import br.com.cvc.evaluation.broker.dto.BrokerHotelRoom;
 import br.com.cvc.evaluation.domain.Hotel;
 import br.com.cvc.evaluation.domain.PriceDetail;
 import br.com.cvc.evaluation.domain.Room;
-import br.com.cvc.evaluation.exceptions.BookingPeriodInvalidException;
+import br.com.cvc.evaluation.exceptions.BookingInvalidPeriodException;
 import br.com.cvc.evaluation.exceptions.HotelNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class BookingService {
 		log.info("Calculating period: checking {}, checkout {}", checkin, checkout);
 
 		if (checkin.isAfter(checkout)) {
-			throw new BookingPeriodInvalidException("The checkin date is greater than the checkout date.");
+			throw new BookingInvalidPeriodException("The checkin date is greater than the checkout date.");
 		}
 		return checkin.until(checkout, ChronoUnit.DAYS);
 	}

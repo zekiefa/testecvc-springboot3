@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class BookingPeriodInvalidException extends RuntimeException {
+public class BookingInvalidPeriodException extends RuntimeException {
 
-    public BookingPeriodInvalidException(final String message) {
+    public BookingInvalidPeriodException(final String message) {
         super(message);
     }
 }

@@ -23,7 +23,7 @@ import java.util.Optional;
 import br.com.cvc.evaluation.broker.BrokerService;
 import br.com.cvc.evaluation.broker.dto.BrokerHotel;
 import br.com.cvc.evaluation.domain.Hotel;
-import br.com.cvc.evaluation.exceptions.BookingPeriodInvalidException;
+import br.com.cvc.evaluation.exceptions.BookingInvalidPeriodException;
 import br.com.cvc.evaluation.exceptions.HotelNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -94,7 +94,7 @@ class BookingServiceTest {
         final var checkout = checkin.minusDays(DayOfWeek.values().length);
 
         // Act / Assert
-        assertThrows(BookingPeriodInvalidException.class,
+        assertThrows(BookingInvalidPeriodException.class,
                         () -> bookingService.findHotels(27, checkin, checkout, 3, 2));
     }
     @Test
