@@ -1,8 +1,6 @@
 package br.com.cvc.evaluation.service;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,7 +11,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,7 +55,7 @@ public class TokenService {
     }
 
     private Claims extractAllClaims(final String token) {
-        return this.parseClaimsJws(token).getBody();
+        return this.parseClaimsJws(token).getPayload();
     }
 
     private Boolean isTokenExpired(final String token) {
@@ -92,11 +90,11 @@ public class TokenService {
         final var now = Instant.ofEpochMilli(System.currentTimeMillis());
         final var expirationTime = Date.from(now.plusMillis(Long.parseLong(this.expiration)));
 
-        return Jwts.builder().setClaims(claims)
-                        .setSubject(subject)
-                        .setIssuer(this.issuer)
-                        .setIssuedAt(Date.from(now))
-                        .setExpiration(expirationTime)
+        return Jwts.builder().claims(claims)
+                        .subject(subject)
+                        .issuer(this.issuer)
+                        .issuedAt(Date.from(now))
+                        .expiration(expirationTime)
                         .signWith(this.key())
                         .compact();
     }
@@ -133,16 +131,16 @@ public class TokenService {
     }
 
     private Jws<Claims> parseClaimsJws(final String token) {
-        return Jwts.parserBuilder()
-                        .setSigningKey(this.key())
+        return Jwts.parser()
+                        .verifyWith(this.key())
                         .build()
-                        .parseClaimsJws(token);
+                        .parseSignedClaims(token);
     }
 
-    private Key key() {
+    private SecretKeySpec key() {
         final var apiKeySecretBytes = DatatypeConverter.parseBase64Binary(this.secret);
 
-        return new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
+        return new SecretKeySpec(apiKeySecretBytes, Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
 }

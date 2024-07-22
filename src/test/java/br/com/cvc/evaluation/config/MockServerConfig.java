@@ -7,12 +7,12 @@ import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
 import static org.mockserver.model.Parameter.param;
 
-import javax.json.Json;
-import javax.json.JsonValue;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 
+import jakarta.json.Json;
+import jakarta.json.JsonValue;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.matchers.MatchType;
 import org.springframework.boot.test.context.TestConfiguration;
