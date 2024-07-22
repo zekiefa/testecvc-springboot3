@@ -1,8 +1,8 @@
 # Simple Spring Boot Project
 
 ### Architecture
-- Java ~~18~~ 17
-- Spring Boot 3.0.5
+- Java ~~17~~ 21
+- Spring Boot ~~3.0.5~~ 3.3.2
 - ~~[Lombok](https://projectlombok.org) to avoid boilerplate code~~
 - ~~[Mapstruct](https://mapstruct.org) for conversions between domains~~
 - [WebClient](https://www.baeldung.com/spring-5-webclient): a reactive client HTTP
